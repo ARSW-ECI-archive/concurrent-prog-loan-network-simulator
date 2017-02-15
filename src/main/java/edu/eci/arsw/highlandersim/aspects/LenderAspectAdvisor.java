@@ -19,15 +19,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  *
  * @author hcadavid
  */
-public class AspectsAdvisor {
+public class LenderAspectAdvisor {
 
-    ConcurrentLinkedQueue<String> transactions=new ConcurrentLinkedQueue<>();
-    //List<String> transactions=new LinkedList<>();
+    List<String> transactions=new LinkedList<>();
     
     public void intercept(JoinPoint jp){
         transactions.add(jp.getTarget().toString());
         if (((Lender)jp.getArgs()[0]).getBalance()==0){
-            System.out.println("bankrupt:");
+            System.out.println("Lender in bankrupt:"+(Lender)jp.getArgs()[0]);
             Iterator<String> it=transactions.iterator();
             
             while(it.hasNext()){
@@ -36,31 +35,6 @@ public class AspectsAdvisor {
             }
             
         }
-        
-        
-    }
-
-    public void intercept2(ProceedingJoinPoint jp) throws Throwable{
-        Lender im1=((Lender)jp.getTarget());
-        Lender im2=((Lender)jp.getArgs()[0]);
-        jp.proceed();
-        System.out.println("aaaa");
-        
-        /*
-        
-                int before = im1.getBalance() + im2.getBalance();
-                jp.proceed();
-                int after = im1.getBalance() + im2.getBalance();
-                if (before != after) {
-                    System.out.println("Wrooong " + im1.toString() + "," + im2.toString());
-                    System.out.println("Before:" + before + ", after:" + after);
-                    System.exit(0);
-                }
-
-            */
-        //}
-
-        
         
         
         

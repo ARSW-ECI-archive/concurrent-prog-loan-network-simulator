@@ -2,6 +2,8 @@ package edu.eci.arsw.highlandersim;
 
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FixedMoneyLender implements Lender {
 
@@ -9,24 +11,24 @@ public class FixedMoneyLender implements Lender {
 
     private static final int DEFAULT_MONEY_AMOUNT = 10;
 
-    private List<Lender> LoanNetworkPopulation = null;
+    private List<Lender> loanNetworkPopulation = null;
 
     private String name;
 
     @Override
-    public void setLenderName(String immortalName) {
-        this.name = immortalName;
+    public void setLenderName(String name) {
+        this.name = name;
     }
 
     private final Random r = new Random(System.currentTimeMillis());
 
-    boolean pause = false;
+    private static boolean pause = false;
 
-    public void pause() {
+    public static void pause() {
         pause = true;
     }
 
-    public void cont() {
+    public static void resume() {
         pause = false;
     }
 
@@ -39,25 +41,31 @@ public class FixedMoneyLender implements Lender {
     public void run() {
 
         while (true) {
+            
+            if (pause){
+                synchronized(loanNetworkPopulation){
+                    try {
+                        loanNetworkPopulation.wait();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(FixedMoneyLender.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }                
+            }
 
             Lender im;
 
-            int myIndex = LoanNetworkPopulation.indexOf(this);
+            int myIndex = loanNetworkPopulation.indexOf(this);
 
-            int nextFighterIndex = r.nextInt(LoanNetworkPopulation.size());
+            int nextFighterIndex = r.nextInt(loanNetworkPopulation.size());
 
-            //avoid self-fight
+            //avoid self-loan
             if (nextFighterIndex == myIndex) {
-                nextFighterIndex = ((nextFighterIndex + 1) % LoanNetworkPopulation.size());
+                nextFighterIndex = ((nextFighterIndex + 1) % loanNetworkPopulation.size());
             }
 
-            im = LoanNetworkPopulation.get(nextFighterIndex);
+            im = loanNetworkPopulation.get(nextFighterIndex);
 
-            //synchronized (im) {
-            //    synchronized (this) {
             im.lend(this);
-            //    }
-            // }
 
             try {
                 Thread.sleep(1);
@@ -77,14 +85,14 @@ public class FixedMoneyLender implements Lender {
             this.balance += DEFAULT_MONEY_AMOUNT;
             System.out.println("Fight: " + this + " vs " + i2);
         } else {
-            System.out.println(this + " says:" + i2 + " is already dead!");
+            System.out.println(this + " says:" + i2 + " is already in bankrupt!");
         }
 
     }
 
     @Override
-    public void setLoanNetworkPopulation(List<Lender> immortalsPopulation) {
-        this.LoanNetworkPopulation = immortalsPopulation;
+    public void setLoanNetworkPopulation(List<Lender> population) {
+        this.loanNetworkPopulation = population;
     }
 
     @Override
