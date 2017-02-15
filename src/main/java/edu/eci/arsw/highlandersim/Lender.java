@@ -11,16 +11,16 @@ import java.util.List;
  *
  * @author hcadavid
  */
-public interface I_Immortal extends Runnable{
+public interface Lender extends Runnable{
     
-    public void fight(I_Immortal i2);
+    public void lend(Lender i2);
     
-    public void setImmortalsPopulation(List<I_Immortal> imsl);
+    public void setLoanNetworkPopulation(List<Lender> imsl);
     
-    public void setImmortalName(String name);
+    public void setLenderName(String name);
     
-    public int getHealth();
+    public int getBalance();
     
-    public void changeHealth(int h);
+    public void changeBalance(int h);
     
 }

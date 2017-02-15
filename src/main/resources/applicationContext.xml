@@ -6,13 +6,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 ">
-    <bean name="immortal" scope="prototype" class="edu.eci.arsw.highlandersim.Immortal">        
+    <bean name="immortal" scope="prototype" class="edu.eci.arsw.highlandersim.FixedMoneyLender">        
     </bean>
     
     <bean name="advisor" class="edu.eci.arsw.highlandersim.aspects.AspectsAdvisor"></bean>
     <aop:config>
         <aop:aspect ref="advisor">
-            <aop:before pointcut="execution(* *(..))" method="intercept" /> 
+            <aop:before pointcut="execution(* lend(..))" method="intercept" /> 
+            <!--<aop:around pointcut="execution(* fight(..))" method="intercept2" /> -->
         </aop:aspect>
     </aop:config>
     

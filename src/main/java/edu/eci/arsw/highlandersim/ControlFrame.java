@@ -30,7 +30,7 @@ public class ControlFrame extends JFrame {
 
     private JPanel contentPane;
 
-    private List<I_Immortal> immortals;
+    private List<Lender> immortals;
 
     private JTextArea output;
     private JTextField numOfImmortals;
@@ -72,7 +72,7 @@ public class ControlFrame extends JFrame {
                 immortals = setupInmortals();
 
                 if (immortals != null) {
-                    for (I_Immortal im : immortals) {
+                    for (Lender im : immortals) {
                         new Thread(im).start();                        
                     }
                 }
@@ -91,8 +91,8 @@ public class ControlFrame extends JFrame {
 				 * COMPLETAR
                  */
                 int sum = 0;
-                for (I_Immortal im : immortals) {
-                    sum += im.getHealth();
+                for (Lender im : immortals) {
+                    sum += im.getBalance();
                 }
 
                 output.setText(immortals.toString() + ". Sum:" + sum);
@@ -135,7 +135,7 @@ public class ControlFrame extends JFrame {
 
     }
 
-    public List<I_Immortal> setupInmortals() {
+    public List<Lender> setupInmortals() {
 
         
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -143,14 +143,14 @@ public class ControlFrame extends JFrame {
         try {
             int ni = Integer.parseInt(numOfImmortals.getText());
 
-            List<I_Immortal> il = new LinkedList<>();
+            List<Lender> il = new LinkedList<>();
 
             
             for (int i = 0; i < ni; i++) {
                 
-                I_Immortal i1 = ac.getBean(I_Immortal.class);
-                i1.setImmortalsPopulation(il);
-                i1.setImmortalName("Immortal #"+i);
+                Lender i1 = ac.getBean(Lender.class);
+                i1.setLoanNetworkPopulation(il);
+                i1.setLenderName("Immortal #"+i);
                 il.add(i1);
             }
             return il;
