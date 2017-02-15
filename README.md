@@ -17,7 +17,7 @@ La 'red de prestamistas' es un modelo de colaboración en el que un grupo de per
 	mvn exec:java -	Dexec.mainClass="edu.eci.arsw.loannetsim.LoanNetworkSimulation" 
 	```
 
-2. Ahora, En la configuración de Spring (applicationContext.xml) elimine el atributo 'scope="prototype"' y pruebe de nuevo la aplicación. Cómo cambia esto el comportamiento de la aplicación?, puede de aquí concluir ([antes de revisar la documentación de Spring](http://docs.spring.io/spring/docs/3.0.0.M3/reference/html/ch04s04.html)) qué efecto tiene la propiedad 'scope'?. Una vez tenga claro esto, deje la configuración original.
+2. Ahora, En la configuración de Spring (applicationContext.xml) elimine la propiedad 'scope="prototype"' de la definición del Bean "lender" y pruebe de nuevo la aplicación. Cómo cambia esto el comportamiento de la aplicación?, puede de aquí concluir ([antes de revisar la documentación de Spring](http://docs.spring.io/spring/docs/3.0.0.M3/reference/html/ch04s04.html)) qué efecto tiene la propiedad 'scope'?. Una vez tenga claro esto, deje la configuración original.
 
 3. Analice con el funcionamiento de la aplicación: por qué razón a veces el mensaje de "*** PRESS ENTER TO VIEW STATISTICS ***" se presenta antes de los últimos LOGs de préstamos?. Plantee una solución para esto.
 	
