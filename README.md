@@ -7,6 +7,8 @@
 
 ##Red de prestamistas
 
+### EJERCICIO PARA ENTREGAR EN CLASE
+
 La 'red de prestamistas' es un modelo de colaboración en el que un grupo de personas se compromete a prestar una suma de dinero (por ahora es una cantidad fija) a cualquier otra persona de su red que se lo solicite (es decir, cada persona de la red podrá tanto pedir prestado y siempre deberá prestar a quien se lo solicite). El programa planteado es una simulación de este modelo, en el que N prestamistas, representados por N hilos, concurrente y aleatoriamente solicitan préstamos a otros integrantes de la red. En la simulación todos tienen un saldo inicial de $500 USD, y los prestamos siempre son de $10 USD. Por regla general, quienes lleguen a la bancarrota (saldo 0), ya no podrán solicitar ni realizar más préstamos. El programa automáticamente detiene la simulación cada 10 segundos para mostrar el saldo total de los prestamistas (es decir, la sumatoria de los saldos de todos los integrantes de la red de préstamos).
 
 1. Revise el funcionamiento del simulador, ejecutándolo varias veces a través del comando:
