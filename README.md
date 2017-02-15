@@ -14,7 +14,7 @@ La 'red de prestamistas' es un modelo de colaboración en el que un grupo de per
 1. Revise el funcionamiento del simulador, ejecutándolo varias veces a través del comando:
 
 	```java
-	mvn exec:java -	Dexec.mainClass="edu.eci.arsw.loannetsim.LoanNetworkSimulation" 
+	mvn exec:java -Dexec.mainClass="edu.eci.arsw.loannetsim.LoanNetworkSimulation" 
 	```
 
 2. Ahora, En la configuración de Spring (applicationContext.xml) elimine la propiedad 'scope="prototype"' de la definición del Bean "lender" y pruebe de nuevo la aplicación. Cómo cambia esto el comportamiento de la aplicación?, puede de aquí concluir ([antes de revisar la documentación de Spring](http://docs.spring.io/spring/docs/3.0.0.M3/reference/html/ch04s04.html)) qué efecto tiene la propiedad 'scope'?. Una vez tenga claro esto, deje la configuración original.
