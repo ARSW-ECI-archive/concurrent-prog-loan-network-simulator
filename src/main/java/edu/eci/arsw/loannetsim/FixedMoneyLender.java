@@ -1,4 +1,4 @@
-package edu.eci.arsw.highlandersim;
+package edu.eci.arsw.loannetsim;
 
 import java.util.List;
 import java.util.Random;
@@ -9,7 +9,8 @@ public class FixedMoneyLender implements Lender {
 
     private int balance;
 
-    private static final int DEFAULT_MONEY_AMOUNT = 10;
+    private static final int DEFAULT_BALANCE_AMOUNT = 500;
+    private static final int DEFAULT_LOAN_AMOUNT = 10;
 
     private List<Lender> loanNetworkPopulation = null;
 
@@ -33,7 +34,7 @@ public class FixedMoneyLender implements Lender {
     }
 
     public FixedMoneyLender() {
-        this.balance = 100;
+        this.balance = DEFAULT_BALANCE_AMOUNT;
         this.name = "NN";
     }
 
@@ -66,6 +67,7 @@ public class FixedMoneyLender implements Lender {
             im = loanNetworkPopulation.get(nextFighterIndex);
 
             im.lend(this);
+            
 
             try {
                 Thread.sleep(1);
@@ -81,9 +83,9 @@ public class FixedMoneyLender implements Lender {
     public void lend(Lender i2) {
 
         if (i2.getBalance() > 0) {
-            i2.changeBalance(i2.getBalance() - DEFAULT_MONEY_AMOUNT);
-            this.balance += DEFAULT_MONEY_AMOUNT;
-            System.out.println("Fight: " + this + " vs " + i2);
+            i2.changeBalance(i2.getBalance() - DEFAULT_LOAN_AMOUNT);
+            this.balance += DEFAULT_LOAN_AMOUNT;
+            System.out.println("$$$ Transaction: " + this + " lends "+DEFAULT_LOAN_AMOUNT +" to "+ i2);
         } else {
             System.out.println(this + " says:" + i2 + " is already in bankrupt!");
         }

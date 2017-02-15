@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.highlandersim;
+package edu.eci.arsw.loannetsim;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -17,12 +17,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class LoanNetworkSimulation {
 
+    private static final int NUMOF_LENDERS=20;
+    
     public static void main(String args[]) throws InterruptedException, IOException{
         ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml"); 
 
         int balancesSum=0;
         
-        List<Lender> lenders = setupLoanNetwork(20, ac);
+        List<Lender> lenders = setupLoanNetwork(NUMOF_LENDERS, ac);
 
         if (lenders != null) {
             for (Lender im : lenders) {
@@ -39,6 +41,7 @@ public class LoanNetworkSimulation {
 
             System.in.read();
 
+            balancesSum=0;
             for (Lender ln : lenders) {
                 balancesSum += ln.getBalance();
             }
