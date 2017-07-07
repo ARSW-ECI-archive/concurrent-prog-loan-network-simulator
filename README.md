@@ -5,7 +5,7 @@
 #### Paralelismo y concurrencia - caso de estudio
 
 
-##Red de prestamistas
+## Red de prestamistas
 
 ### EJERCICIO PARA ENTREGAR EN CLASE
 
